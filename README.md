@@ -168,7 +168,7 @@ Example of environment config file. It can contain other variables as well. (eg:
 
 
 ## Release History
-- 0.1.0 Initial release
+- 0.1.1 Initial release
 
 ##Author
 Miklos Csere

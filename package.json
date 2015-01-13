@@ -1,7 +1,7 @@
 {
   "name": "grunt-set-env",
   "description": "Environment variables to be used in future grunt tasks in the chain config.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/mikibrv/grunt-set-env",
   "author": {
     "name": "Miki",
