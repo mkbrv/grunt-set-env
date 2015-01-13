@@ -1,6 +1,6 @@
 /*
  * grunt-set-env
- * https://github.com/mcsere/grunt-set-env
+ * https://github.com/mikibrv/grunt-set-env
  *
  * Copyright (c) 2015 Miki
  * Licensed under the MIT license.

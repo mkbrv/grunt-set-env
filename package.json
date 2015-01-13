@@ -2,7 +2,7 @@
   "name": "grunt-set-env",
   "description": "Environment variables to be used in grunt tasks config.",
   "version": "0.1.0",
-  "homepage": "https://github.com/mcsere/grunt-set-env",
+  "homepage": "https://github.com/mikibrv/grunt-set-env",
   "author": {
     "name": "Miki",
     "email": "m.csere@rocketmail.com",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/mcsere/grunt-set-env.git"
+    "url": "git:github.com/mikibrv/grunt-set-env.git"
   },
   "bugs": {
-    "url": "https://github.com/mcsere/grunt-set-env/issues"
+    "url": "https://github.com/mikibrv/grunt-set-env/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/mcsere/grunt-set-env/blob/master/LICENSE-MIT"
+      "url": "https://github.com/mikibrv/grunt-set-env/blob/master/LICENSE-MIT"
     }
   ],
   "engines": {
