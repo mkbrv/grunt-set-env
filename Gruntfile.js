@@ -13,13 +13,15 @@ module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
         setenv: {
+            options:{
+                envFolder: "config/env"
+            },
             dev: {
                 options: {
-                    env: function () {
-                        return "DEV";
-                    }
+                    envTarget: "dev"
                 }
             }
+
         },
         // Unit tests.
         nodeunit: {

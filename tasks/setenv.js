@@ -16,6 +16,7 @@ module.exports = function (grunt) {
         var options = this.options({
             envFolder: 'env',
             envTarget: 'dev',
+            envKey: 'env',
             env: undefined
         });
 
@@ -37,7 +38,7 @@ module.exports = function (grunt) {
                 env = options.env;
             }
         }
-        grunt.config.set("env", env);
+        grunt.config.set(options.envKey, env);
         grunt.log.writeln("Environment set: " + target);
         return true;
     });

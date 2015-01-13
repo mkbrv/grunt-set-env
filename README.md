@@ -1,6 +1,7 @@
 # grunt-set-env
 
-> Environment variables to be used in grunt tasks config.
+> Allows you to define environment variables to be used in grunt tasks config. Variables can be a JSON/String stored in external
+file, hard-coded or can be the result of a function.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
@@ -17,73 +18,122 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-set-env');
 ```
 
-## The "set_env" task
+## The "setenv" task
 
 ### Overview
-In your project's Gruntfile, add a section named `set_env` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `setenv` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
-  set_env: {
+  setenv: {
     options: {
-      // Task-specific options go here.
+        envFolder: "config/env"
     },
-    your_target: {
-      // Target-specific file lists and/or options go here.
+    dev: {
+        envTarget:"env"
     },
+    prod:{
+        env:{ root_folder : "production"}
+    },
+    test:{
+        envKey:"test",
+        env:function(){
+            return "test"
+        }
+    }
   },
 });
 ```
 
 ### Options
 
-#### options.separator
+#### options.envFolder
 Type: `String`
-Default value: `',  '`
+Default value: `'env'`
 
-A string value that is used to do something with whatever.
+A string value that is used to determine the folder from where json configuration will be read from.
 
-#### options.punctuation
+#### options.envTarget
 Type: `String`
-Default value: `'.'`
+Default value: `'dev'`
 
-A string value that is used to do something else with whatever else.
+A string value that is used to recognize the specific json config file which will be read
+
+#### options.envKey
+Type: `String`
+Default value: `'env'`
+
+A string value that is used as key for grunt.config. To recover the environment values <%=key.whatever%> or grunt.config.get("key");
+
+#### options.env
+Type: `String`,`Object`,`Function`
+Default value: `'undefined'`
+
+An environment variable which will be used instead of reading from a json. It can be the result of a function,
+a String or an Object.
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example if you run `grunt setenv:dev` it will search for the dev.json file in config/env folder. If found
+it will set in grunt.config the env key with the json object. Considering the json `{deploy_root:'path'}`
+for all the tasks runned after setenv:dev
 
 ```js
 grunt.initConfig({
-  set_env: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+  setenv: {
+        options: {
+            envFolder: "config/env"
+        },
+        dev:{
+            //nothing
+        }
   },
+  someothertask:{
+    options:{
+         dest:"<%=env.deploy_root%>/",
+         src: function(){
+            var envObject = grunt.config.get("env");
+         }
+    }
+  }
 });
+grunt.registerTask('build','setenv:dev','someothertask')
 ```
 
 #### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+In this example, I am creating 4 environments.
+- dev : will have json stored in the config/env/env.json
+- prod: will have json hardcoded
+- test: will have custom key: test and the environment variable from function
 
 ```js
 grunt.initConfig({
-  set_env: {
+  setenv: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+        envFolder: "config/env"
     },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+    dev: {
+        envTarget:"env"
     },
+    prod:{
+        env:{ root_folder : "production"}
+    },
+    test:{
+        envKey:"test",
+        env:function(){
+            return "test"
+        }
+    }
   },
 });
 ```
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+
 
 ## Release History
-_(Nothing yet)_
+- 0.1.0 Initial release
+
+##Author
+Miklos Csere
