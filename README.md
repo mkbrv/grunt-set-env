@@ -102,7 +102,7 @@ grunt.registerTask('build','setenv:dev','someothertask')
 ```
 
 #### Custom Options
-In this example, I am creating 4 environments.
+In this example, I am creating 3 environments.
 - dev : will have json stored in the config/env/env.json
 - prod: will have json hardcoded
 - test: will have custom key: test and the environment variable from function
