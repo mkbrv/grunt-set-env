@@ -1,0 +1,4 @@
+{
+    "root": "prod",
+    "deploy_folder": "production"
+}
