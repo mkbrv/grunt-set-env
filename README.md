@@ -86,7 +86,7 @@ grunt.initConfig({
             envFolder: "config/env"
         },
         dev:{
-            //nothing
+            envTarget:"dev.json" // this is also default
         }
   },
   someothertask:{
