@@ -18,7 +18,7 @@ module.exports = function (grunt) {
             },
             dev: {
                 options: {
-                    envTarget: "dev"
+                    envTarget: "dev.ini"
                 }
             }
 

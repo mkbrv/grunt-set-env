@@ -15,7 +15,7 @@ module.exports = function (grunt) {
         // Merge task-specific options with these defaults.
         var options = this.options({
             envFolder: 'env',
-            envTarget: 'dev',
+            envTarget: 'dev.json',
             envKey: 'env',
             env: undefined
         });
@@ -23,9 +23,12 @@ module.exports = function (grunt) {
         if (target === undefined) {
             target = options.envTarget;
         }
+        if (target.indexOf(".") === -1) {
+            target = target + ".json";
+        }
         var env;
         if (options.env === undefined) {
-            var envFile = options.envFolder + "/" + target + ".json";
+            var envFile = options.envFolder + "/" + target;
             if (!grunt.file.exists(envFile)) {
                 grunt.log.error("Environment " + target + " not found. Please check folder: " + envFile);
                 return true;//return false to abort the execution
