@@ -129,6 +129,33 @@ grunt.initConfig({
 });
 ```
 
+In this example I will be able to deploy on different environments:
+- grunt deploy:dev
+- grunt deploy:testOne
+- grunt deploy:testTwo
+
+```js
+module.exports = function (grunt) {
+    grunt.registerTask('deploy', function (env) {
+        grunt.task.run([
+            'setenv:' + env,
+            "clean",
+            'jshint',
+            'copy:static',
+            'less',
+            'useminPrepare',
+            'requirejs',
+            'concat',
+            'usemin',
+            'processhtml',
+            'uglify',
+            'cssmin'
+        ]);
+    });
+};
+```
+
+
 ## Contributing
 
 
