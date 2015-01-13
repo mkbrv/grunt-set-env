@@ -155,6 +155,14 @@ module.exports = function (grunt) {
 };
 ```
 
+Example of environment config file. It can contain other variables as well. (eg: pkg)
+```js
+{
+    "type": "deployment",
+    "folder": "deploy/<%=pkg.name%>-<%=pkg.version%>"
+}
+```
+
 
 ## Contributing
 
