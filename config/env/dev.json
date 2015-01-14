@@ -1,1 +1,4 @@
-"DEV"
+{
+    "type": "dev",
+    "root": "deploy/<%=pkg.name%>-<%=pkg.version%>"
+}

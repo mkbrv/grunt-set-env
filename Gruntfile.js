@@ -13,12 +13,21 @@ module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
         setenv: {
-            options:{
+            options: {
                 envFolder: "config/env"
             },
             dev: {
                 options: {
-                    envTarget: "dev.json"
+                    envTarget: "test.json"
+                }
+            },
+            prod: {
+            },
+            custom: {
+                options: {
+                    env:{
+                        "custom-env":"custom"
+                    }
                 }
             }
 
@@ -36,6 +45,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
 
-    grunt.registerTask('test', ['setenv', 'nodeunit']);
+    grunt.registerTask('test', ['setenv:prod', 'nodeunit']);
 
 };

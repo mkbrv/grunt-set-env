@@ -33,7 +33,7 @@
     "grunt-debug-task": "^0.1.5"
   },
   "peerDependencies": {
-    "grunt": "~0.4.x"
+    "grunt": "~0.4.5"
   },
   "keywords": [
       "gruntplugin",

@@ -11,27 +11,30 @@
 
 module.exports = function (grunt) {
 
-    grunt.registerMultiTask('setenv', 'Environment variables to be used in grunt tasks config.', function (target) {
-        // Merge task-specific options with these defaults.
-        var options = this.options({
-            envFolder: 'env',
-            envTarget: 'dev.json',
-            envKey: 'env',
-            env: undefined
-        });
+    var defaultOptions = {
+        envFolder: 'env', //folder where to look for the environments
+        envTarget: 'dev.json', // file name where config can be found. Default: Will search for target.json
+        envKey: 'env', //key to be used in grunt.config
+        env: undefined // environment variable in case you wish to hard-code-it or have it as a function result
+    };
 
-        if (target === undefined) {
-            target = options.envTarget;
-        }
-        if (target.indexOf(".") === -1) {
-            target = target + ".json";
-        }
+    grunt.registerMultiTask('setenv', 'Environment variables to be used in grunt tasks config.', function () {
+        // Merge task-specific options with these defaults.
+        var options = this.options(defaultOptions);
+
+        var target = this.target;
         var env;
-        if (options.env === undefined) {
+        if (options.env === undefined) { //if env is hardcoded.. let it be
+            if (options.envTarget !== defaultOptions.envTarget) {
+                target = options.envTarget;
+            }
+            if (target.indexOf(".") === -1) {
+                target = target + ".json";
+            }
             var envFile = options.envFolder + "/" + target;
             if (!grunt.file.exists(envFile)) {
                 grunt.log.error("Environment " + target + " not found. Please check folder: " + envFile);
-                return true;//return false to abort the execution
+                return false;//return false to abort the execution
             }
             env = grunt.file.readJSON(envFile);
         } else {
