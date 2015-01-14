@@ -1,10 +1,10 @@
 # grunt-set-env
 
-> Allows you to define environment variables to be used in grunt tasks config. Variables can be a JSON/String stored in external
-file, hard-coded or can be the result of a function.
+> Allows you to define environment variables to be used in config of future grunt tasks in the chain. Variables can be a
+JSON/String stored in external file, hard-coded or can be the result of a function.
 
 ## Getting Started
-This plugin requires Grunt `~0.4.5`
+This plugin requires Grunt `~0.4.x`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
@@ -101,7 +101,7 @@ grunt.initConfig({
 grunt.registerTask('build','setenv:dev','someothertask')
 ```
 
-#### Custom Options
+#### Custom Example
 In this example, I am creating 3 environments.
 - dev : will have json stored in the config/env/env.json
 - prod: will have json hardcoded
@@ -136,6 +136,16 @@ In this example I will be able to deploy on different environments:
 
 ```js
 module.exports = function (grunt) {
+      grunt.initConfig({
+                pkg: grunt.file.readJSON('package.json')
+        });
+            grunt.config('setenv', {
+                dev: {
+                    options: {
+                        envFolder: "grunt-tasks/env"
+                    }
+                }
+            });
     grunt.registerTask('deploy', function (env) {
         grunt.task.run([
             'setenv:' + env,
@@ -154,8 +164,23 @@ module.exports = function (grunt) {
     });
 };
 ```
+```js
+ grunt.config('copy', {
+            static: {
+                files: [
+                    {expand: true, cwd: 'src/', src: ['index.html'], dest: '<%=env.folder%>/'},
+                    /*  boostrap fonts and images*/
+                    {expand: true, cwd: 'src/static/vendor/bootstrap/fonts', src: ['**'], dest: '<%=env.folder%>/static/fonts'},
+                /** img stuff */
+                    {expand: true, cwd: 'src/static/img', src: ['**'], dest: '<%=env.folder%>/static/img'}
+                ]
+            }
+    );
+};
+```
 
-Example of environment config file. It can contain other variables as well. (eg: pkg)
+Example of environment config file: grunt-tasks/env/dev.json <br>
+It can contain other variables as well. (eg: pkg)
 ```js
 {
     "type": "deployment",
@@ -164,11 +189,12 @@ Example of environment config file. It can contain other variables as well. (eg:
 ```
 
 
-## Contributing
+## GitHub
+[https://github.com/mikibrv/grunt-set-env](https://github.com/mikibrv/grunt-set-env)
 
 
 ## Release History
-- 0.1.1 Initial release
+- 0.1.2 Initial release + readme changes
 
 ##Author
 Miklos Csere
